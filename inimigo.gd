@@ -5,7 +5,8 @@ var caminho = preload("res://projetil.tscn")
 @export var stamina:int
 @export var dano_i:int 
 
-var HpJogador = $"../Jogador".HpJogador
+@onready var HpJogador = %Jogador.HpJogador
+@onready var vez_j = %Jogador.vez_j
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,7 +20,8 @@ func _physics_process(_delta: float) -> void:
 	if vez_i:
 		vez_i = false
 		atirar()
-		
+		HpJogador = HpJogador - dano_i
+		vez_j = true
 
 
 func atirar():
@@ -30,3 +32,4 @@ func atirar():
 	get_parent().add_child(projetil)
 	
 	
+
