@@ -1,11 +1,12 @@
 extends Node2D
-var caminho = preload("res://projetil.tscn")
+var caminho_projetil = preload("res://projetil.tscn")
+var caminho_pendulo = preload("res://pendulo.tscn")
 @export var vez_j:bool
 @export var HpJogador:int
 @export var stamina:int
 @export var dano_j:int
-var vez_i = $"../Inimigo".vez_i
-var HpInimigo = $"../Inimigo".HpInimigo
+@onready var vez_i = %Inimigo.vez_i
+@onready var HpInimigo = %Inimigo.HpInimigo
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,7 +31,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func atirar():
-	var projetil=caminho.instantiate()
+	var projetil=caminho_projetil.instantiate()
 	projetil.dir = rotation
 	projetil.pos = $ControleJ.global_position
 	projetil.rota = global_rotation
@@ -38,4 +39,7 @@ func atirar():
 	
 	
 func sintonizar():
+	var pendulo=caminho_pendulo.instantiate()
+	get_parent().add_child(pendulo)
 	pass
+
